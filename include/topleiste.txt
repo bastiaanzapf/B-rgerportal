@@ -1,0 +1,2 @@
+		<h5 style="text-align: right"><a href="index.php">Aktuelles</a> / <a href="stadtparlament.php">Stadtparlament Marburg</a> / 
+		<a href="kreistag.php">Kreistag Marburg-Biedenkopf</a> / <a href="index.php">Impressum</a></h5>

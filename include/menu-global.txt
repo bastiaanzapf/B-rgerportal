@@ -1,0 +1,22 @@
+<table border="1" width="200" id="table4" cellspacing="1" cellpadding="0" bgcolor="#F9FF82" style="float: left">
+	<tr>
+		<td>
+		<h5>&nbsp;<br>
+		&nbsp;<a href="index.php">Startseite</a></h5>
+		<h5>&nbsp;<a href="stadtparlament.php">Stadtpralament MR</a></h5>
+		<h6>&nbsp;&nbsp;&nbsp;<a href="stadtparlament.php">Aktuelle Themen</a></h6>
+		<h6>&nbsp;&nbsp;&nbsp;<a href="stadtparlament_chronic.php">Themen Chronik</a></h6>
+		<h5>&nbsp;<a href="Kreistag.php">Kreistag MR-BID</a></h5>
+		<h6>&nbsp;&nbsp;&nbsp;<a href="Kreistag.php">Aktuelle Themen</a></h6>
+		<h6>&nbsp;&nbsp;&nbsp;<a href="Kreistag.php">Themen Chronik</a></h6>
+		<h5>&nbsp;<a href="index.php">Aktuelle Bürgerbegehren</a></h5>
+		<h5>&nbsp;<a href="index.php">Hilfsmittel</a></h5>
+		<h6>&nbsp;&nbsp;&nbsp;<a href="index.php">HowTo Bürgerbegehren</a></h6>
+		<h6>&nbsp;&nbsp;&nbsp;<a href="index.php">Veranstaltungskalender</a></h6>
+		<h5>&nbsp;<a href="register.php">Mitmachen</a></h5>
+		<h6>&nbsp;&nbsp;&nbsp;<a href="login.php">login</a></h6>
+		<h5>&nbsp;<a href="index.php">Impressum</a></h5>
+		<p>&nbsp;</p>
+		</td>
+	</tr>
+</table>

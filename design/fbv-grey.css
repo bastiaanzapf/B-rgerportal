@@ -1,0 +1,112 @@
+body {
+ display:block;
+ font-family: arial, verdana, helvetica; 
+ color: #000000; 
+ background-color:#E4E4E4; 
+ padding: 0px;
+}
+
+p { text-align:justify;
+	font-family: arial, verdana, helvetica; 
+	font-size: 9pt;
+}
+
+a {text-decoration: none;}        
+
+a:link { color:#007912;}
+
+a:visited { color:#007912;}
+
+a:active { color:#007912;}   
+
+a:hover { text-decoration: underline;  color:#007912; }
+
+input { border: 1px solid #000000; }
+
+table { 
+border-left:1px solid #000000; 
+border-right:1px solid #000000; 
+border-top:1px solid #000000; 
+border-bottom:1px solid #000000; 
+}
+
+
+tr,th,td {
+padding:5px 5px 5px 5px; 
+vertical-align:top;
+}
+
+
+th { 
+text-align:center;
+font-family: arial, verdana, helvetica; 
+font-weight:bold;
+color:#ffffff; 
+font-size: 10pt;
+background-color:#004800;
+border:none;
+}
+
+td { 
+border: none;
+text-align:left;
+font-family: arial, verdana, helvetica; 
+color:#000000; 
+}
+
+hr { color:#000000; height:1px; width: 100%; }
+
+ol { 
+ font-family: arial, verdana, helvetica;
+ font-size: 9pt; 
+ text-align:justify; 
+ color: #000000; 
+}
+ol li { 
+  text-indent:0; 
+  margin: 0px 0px 0px 0px;
+}
+ul {
+ font-family: arial, verdana, helvetica; 
+ color: #000000; 
+ font-size: 8pt; 
+}
+ul li { 
+ list-style: disc;
+ text-indent:0; 
+ color: #000000; 
+ margin: 0px 0px 0px 0px;
+}
+
+
+h1, h2 { display: block; text-align: left;
+ color: #000;
+ font-family: arial, verdana, helvetica; 
+ border: 1px solid #000000;
+ border-top: none; border-left: none; border-right: none;
+ padding: 0px;
+}
+h3 { display: block; 
+ border: 1px solid #000000;
+ font-family: arial, verdana, helvetica; 
+ border-top: none; border-right: none; border-left: none; 
+ padding: 0px; 
+}
+h4 { display: block; text-align: left;  
+ border-top: none;border-right: none;border-left: none; 
+ font-family: arial, verdana, helvetica; 
+ padding: 0px; 
+}
+h5 { display: block; text-align: left;  
+ border-top: none;
+ border-bottom: 1px solid #000000;
+ border-right: none;
+ border-left: none;
+ font-family: arial, verdana, helvetica;  
+ padding: 0px; 
+}
+h6 { display: block; text-align: left;  
+ border-top: none;border-right: none;border-left: none;
+ font-family: arial, verdana, helvetica;  
+ padding: 0px; 
+}
