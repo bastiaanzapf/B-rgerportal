@@ -1,7 +1,25 @@
 <?
 
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_URL,"http://www.svmr.de/bi/si019.asp");
+curl_setopt($curl, CURLOPT_POST, 1);
+curl_setopt($curl, CURLOPT_POSTFIELDS,"SILFDNR=1403&options=16");
+curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
+$result= curl_exec ($curl);
+curl_close ($curl);
+//echo $result;
+
+$config = array(
+           'indent'         => true,
+           'output-xhtml'   => true,
+           'wrap'           => 200);
+
+$tidy = new tidy;
+$tidy->parseString($result, $config, 'utf8'); // XXX charset?
+$tidy->cleanRepair();
+
 $doc = new DOMDocument();
-$doc->loadHTMLFile("../cache/si019.asp.html.tidy");
+$doc->loadHTML($tidy);
 
 $forms=$doc->getElementsByTagName('form');
 
