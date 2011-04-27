@@ -36,8 +36,18 @@ function find_class_zl1_1_2($accum,$node) {
 }
 
 function accumtext($accum,$node) {
-  if (get_class($node)=="DOMText") {
+  switch (get_class($node)) {
+  case "DOMText":
     return $accum . trim($node->C14N());
+  case "DOMElement":
+    if ($node->hasAttribute('href'))
+      if (preg_match('|^http://www.svmr.de/bi/to010.asp|',$node->getAttribute('href')))
+	echo "X";
+      else
+	echo "A";
+    else
+      echo "B";
+    break;
   }
   return $accum;
 }
