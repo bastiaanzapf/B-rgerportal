@@ -41,30 +41,44 @@ function getqueryasarray($url) {
   return $r;
 }
 
-function accumtext($accum,$node) {
+function parse_top($accum,$node) {
   switch (get_class($node)) {
   case "DOMText":
-    //    echo 'T '.$accum['column'].':'.trim($node->C14N())."\n";
     if ($accum['column']==4)
       $accum['betreff'].=trim($node->nodeValue);
     break;
+
   case "DOMElement":
     if ($node->tagName=='tr') {
+
+      // Neue Zeile hat angefangen, Akkumulator initialisieren
+
       $accum=array();
       $accum['column']=0;
       $accum['betreff']='';
     }
+
     if ($node->tagName=='td')
+
+      // Neue Spalte
+
       $accum['column']++;
+
     if ($accum['column']==1) {
+
+      // 1. Spalte: Top-Link
+
       if ($node->hasAttribute('href')) {
 	if (preg_match('|^http://www.svmr.de/bi/to010.asp|',$node->getAttribute('href')))
 	  $accum['top_link']=getqueryasarray($node->getAttribute('href'));
 	else
-	  throw new Exception("Unerwarteter Link in Spalte 4 (TOP-Link)");
+	  throw new Exception("Unerwarteter Link in Spalte 1 (TOP-Link)");
       }
     }
     if ($accum['column']==6) {
+
+      // 6. Spalte: Vo-Link
+
       if ($node->hasAttribute('href')) 
 	if (preg_match('|^http://www.svmr.de/bi/vo020.asp|',$node->getAttribute('href')))
 	  $accum['vorlage_link']=getqueryasarray($node->getAttribute('href'));
@@ -78,9 +92,7 @@ function accumtext($accum,$node) {
 }
 
 function outputtop($node) {
-  //  var_dump(get_class_methods($node->childNodes->item(0)));
-  //  var_dump($node->childNodes->item(0)->C14N());
-  $a=map_to_children('','accumtext',$node);
+  $a=map_to_children('','parse_top',$node);
   echo $a['betreff']."\n";
   echo "TOP: ".$a['top_link']['SILFDNR']." - ";
   echo $a['top_link']['TOLFDNR']."\n";
@@ -94,8 +106,11 @@ $tables=$doc->getElementsByTagName('table');
 
 foreach ($tables as $t) {
   if ($t->getAttribute("class")=="tl1") {
+
+    // Da es nur eine Tabelle mit dieser Klasse gibt, wird 
+    // dieser Block nur einmal aufgerufen
+
     $a=map_to_children(array(),'find_class_zl1_1_2',$t);
-    //    var_dump($a);
     array_map('outputtop',$a);
   }
 }
