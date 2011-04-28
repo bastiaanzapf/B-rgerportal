@@ -38,15 +38,23 @@ function find_class_zl1_1_2($accum,$node) {
 function accumtext($accum,$node) {
   switch (get_class($node)) {
   case "DOMText":
-    return $accum . trim($node->C14N());
+    //    echo 'T '.$accum['column'].':'.trim($node->C14N())."\n";
+    if ($accum['column']==4)
+      $accum['betreff'].=trim($node->nodeValue);
+    break;
   case "DOMElement":
+    if ($node->tagName=='tr') {
+      $accum=array();
+      $accum['column']=0;
+      $accum['betreff']='';
+    }
+    if ($node->tagName=='td')
+      $accum['column']++;
     if ($node->hasAttribute('href'))
       if (preg_match('|^http://www.svmr.de/bi/to010.asp|',$node->getAttribute('href')))
-	echo "X";
+	$accum['link_url']=parse_url($node->getAttribute('href'));
       else
-	echo "A";
-    else
-      echo "B";
+	echo "?";
     break;
   }
   return $accum;
@@ -55,7 +63,9 @@ function accumtext($accum,$node) {
 function outputtop($node) {
   //  var_dump(get_class_methods($node->childNodes->item(0)));
   //  var_dump($node->childNodes->item(0)->C14N());
-  echo map_to_children('','accumtext',$node);
+  $a=map_to_children('','accumtext',$node);
+  echo $a['betreff']."\n";
+  echo $a['link_url']['query']."\n";
   echo "\n***\n";
 }
 
