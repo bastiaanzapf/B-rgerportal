@@ -35,6 +35,12 @@ function find_class_zl1_1_2($accum,$node) {
   return $accum;
 }
 
+function getqueryasarray($url) {
+  $x=parse_url($url);
+  parse_str($x['query'],$r);
+  return $r;
+}
+
 function accumtext($accum,$node) {
   switch (get_class($node)) {
   case "DOMText":
@@ -50,11 +56,22 @@ function accumtext($accum,$node) {
     }
     if ($node->tagName=='td')
       $accum['column']++;
-    if ($node->hasAttribute('href'))
-      if (preg_match('|^http://www.svmr.de/bi/to010.asp|',$node->getAttribute('href')))
-	$accum['link_url']=parse_url($node->getAttribute('href'));
-      else
-	echo "?";
+    if ($accum['column']==1) {
+      if ($node->hasAttribute('href')) {
+	if (preg_match('|^http://www.svmr.de/bi/to010.asp|',$node->getAttribute('href')))
+	  $accum['top_link']=getqueryasarray($node->getAttribute('href'));
+	else
+	  throw new Exception("Unerwarteter Link in Spalte 4 (TOP-Link)");
+      }
+    }
+    if ($accum['column']==6) {
+      if ($node->hasAttribute('href')) 
+	if (preg_match('|^http://www.svmr.de/bi/vo020.asp|',$node->getAttribute('href')))
+	  $accum['vorlage_link']=getqueryasarray($node->getAttribute('href'));
+	else
+	  throw new Exception("Unerwarteter Link in Spalte 6 (VO-Link)");
+
+    }
     break;
   }
   return $accum;
@@ -65,9 +82,12 @@ function outputtop($node) {
   //  var_dump($node->childNodes->item(0)->C14N());
   $a=map_to_children('','accumtext',$node);
   echo $a['betreff']."\n";
-  echo $a['link_url']['query']."\n";
+  echo "TOP: ".$a['top_link']['SILFDNR']." - ";
+  echo $a['top_link']['TOLFDNR']."\n";
+  echo "VO: ".$a['vorlage_link']['VOLFDNR']."\n";
   echo "\n***\n";
 }
+
 
 //$forms=$doc->getElementsByTagName('form');
 $tables=$doc->getElementsByTagName('table');
