@@ -3,13 +3,13 @@
 <head>
 <meta http-equiv="Content-Language" content="de">
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Bürgerportal Marburg-Biedenkopf</title>
+<title>BÃ¼rgerportal Marburg-Biedenkopf</title>
 <link rel="stylesheet" type="text/css" href="design/fbv-grey.css">
 </head>
 
 <body>
 
-<h2 align="center" style="text-align: right">Bürgerportal Marburg-Biedenkopf&nbsp;
+<h2 align="center" style="text-align: right">BÃ¼rgerportal Marburg-Biedenkopf&nbsp;
 (1. Entwurf)</h2>
 <table border="0" cellpadding="0" cellspacing="0" width="100%" id="table4" style="border-style: solid; border-width: 0; padding: 0">
 	<tr>
@@ -26,37 +26,37 @@
 				<td bgcolor="#FFFFFF">
 				<h3>&nbsp;Stadtparlament Marburg</h3>
 				<p>Aktuell sind X Mitglieder der Piratenpartei im Stadtparlament
-				vertreten. Mit diesen kann hier über kommende Anstimmungen in
-				der nächsten Sitzung des Stadtparlamentes diskutiert werden.</p>
-				<p>Nächster Termin...</p>
+				vertreten. Mit diesen kann hier Ã¼ber kommende Anstimmungen in
+				der nÃ¤chsten Sitzung des Stadtparlamentes diskutiert werden.</p>
+				<p>NÃ¤chster Termin...</p>
 				<p>Aktuelle Entscheidungen die anstehen:<font color="#FF0000">
 				{Entweder nach TO sortieren oder automatisch nach Relevanz (bsp.
 				Klicks)}</font></p>
 				<ul>
-					<li><a href="sp_s0111_oe5.php">Stiftung des &quot;Jürgen-Markus-Preis: Marburg barrierefrei&quot;</a></li>
-					<li>Marburger Ortsrecht hier: I. Nachtrag zur Satzung über
+					<li><a href="sp_s0111_oe5.php">Stiftung des &quot;JÃ¼rgen-Markus-Preis: Marburg barrierefrei&quot;</a></li>
+					<li>Marburger Ortsrecht hier: I. Nachtrag zur Satzung Ã¼ber
 					die Erhebung einer Steuer auf Spielapparate und auf das
 					Spielen um Geld oder Sachwerte im Gebiet der
-					Universitätsstadt Marburg</li>
-					<li>Städtebaulicher Ideenwettbewerb Rudolphsplatz</li>
-					<li>Bauleitplanung der Universitätsstadt Marburg Beschluss
-					für die Flächennutzungsplanänderung Nr. 3/5 [Elisabethenhof
-					Marburg] und Aufstellungsbeschluss für den Vorhaben- und
-					Erschließungsplan Nr. 3/8 [Elisabethenhof] in Marburg</li>
-					<li>Bauleitplanung der Universitätsstadt Marburg Öffentliche
+					UniversitÃ¤tsstadt Marburg</li>
+					<li>StÃ¤dtebaulicher Ideenwettbewerb Rudolphsplatz</li>
+					<li>Bauleitplanung der UniversitÃ¤tsstadt Marburg Beschluss
+					fÃ¼r die FlÃ¤chennutzungsplanÃ¤nderung Nr. 3/5 [Elisabethenhof
+					Marburg] und Aufstellungsbeschluss fÃ¼r den Vorhaben- und
+					ErschlieÃŸungsplan Nr. 3/8 [Elisabethenhof] in Marburg</li>
+					<li>Bauleitplanung der UniversitÃ¤tsstadt Marburg Ã–ffentliche
 					Auslegung des Bebauungsplanentwurfes Nr. 7/6 [Wassergasse -Schubbelackerweg]
 					in Marburg</li>
 					<li>Bauleitplanung der Stadt Marburg; Beschluss zur
 					Aufstellung des Bebauungsplanes Nr. 11/7, Campus Lahnberge,
 					Synthetische Mikrobiologie</li>
-					<li>Bauleitplanung der Universitätsstadt Marburg Beschluss
+					<li>Bauleitplanung der UniversitÃ¤tsstadt Marburg Beschluss
 					zur Aufstellung des Bebauungsplanes Nr. 6/13 (inkl.
-					Teiländerung 6/21) Alte Kasseler Straße/Schützenstraße</li>
+					TeilÃ¤nderung 6/21) Alte Kasseler StraÃŸe/SchÃ¼tzenstraÃŸe</li>
 					<li>Bauleitplanung der Stadt Marburg Bebauungsplan Nr.
-					18/8-4. Änderung, [Beltershäuser-/Cappeler Straße,
-					tegut-Markt] im Stadtteil Cappel - Bericht über die
-					Ergebnisse der Prüfung der eingegangenen Anregungen -
-					Satzungsbeschluss - Beschluss über die gestalterischen
+					18/8-4. Ã„nderung, [BeltershÃ¤user-/Cappeler StraÃŸe,
+					tegut-Markt] im Stadtteil Cappel - Bericht Ã¼ber die
+					Ergebnisse der PrÃ¼fung der eingegangenen Anregungen -
+					Satzungsbeschluss - Beschluss Ã¼ber die gestalterischen
 					Festsetzungen</li>
 					<li>...</li>
 					<li><font color="#FF0000">{Alle weiteren Abstimmungen}</font></li>

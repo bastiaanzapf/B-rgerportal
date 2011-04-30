@@ -3,13 +3,13 @@
 <head>
 <meta http-equiv="Content-Language" content="de">
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Bürgerportal Marburg-Biedenkopf</title>
+<title>BÃ¼rgerportal Marburg-Biedenkopf</title>
 <link rel="stylesheet" type="text/css" href="design/fbv-grey.css">
 </head>
 
 <body>
 
-<h2 align="center" style="text-align: right">Bürgerportal Marburg-Biedenkopf&nbsp;
+<h2 align="center" style="text-align: right">BÃ¼rgerportal Marburg-Biedenkopf&nbsp;
 (1. Entwurf)</h2>
 <table border="0" cellpadding="0" cellspacing="0" width="100%" id="table4" style="border-style: solid; border-width: 0; padding: 0">
 	<tr>
@@ -26,29 +26,29 @@
 				<td bgcolor="#FFFFFF">
 				<h3>&nbsp;Kreistag Marburg-Biedenkopf</h3>
 				<p>Aktuell sind X Mitglieder der Piratenpartei im Kreistag
-				vertreten. Mit diesen kann hier über kommende Anstimmungen in
-				der nächsten Sitzung des Stadtparlamentes diskutiert werden.</p>
-				<p>Nächster Termin 04.02.2010</p>
+				vertreten. Mit diesen kann hier Ã¼ber kommende Anstimmungen in
+				der nÃ¤chsten Sitzung des Stadtparlamentes diskutiert werden.</p>
+				<p>NÃ¤chster Termin 04.02.2010</p>
 				<p>Aktuelle Entscheidungen die anstehen:<font color="#FF0000">
 				{Entweder nach TO sortieren oder automatisch nach Relevanz (bsp.
 				Klicks)}</font></p>
 				<ul>
-					<li>Antrag der Fraktionen CDU, BÜNDNIS 90/DIE GRÜNEN, Freie 
-					Wähler und FDP betreffend &quot;Aktionsplan zur Umsetzung der UN 
+					<li>Antrag der Fraktionen CDU, BÃœNDNIS 90/DIE GRÃœNEN, Freie 
+					WÃ¤hler und FDP betreffend &quot;Aktionsplan zur Umsetzung der UN 
 					Behindertenrechtskonvention&quot;</li>
-					<li>Antrag der Fraktionen CDU, BÜNDNIS 90/DIE GRÜNEN, Freie 
-					Wähler und FDP betreffend &quot;Bericht zur Integration in Arbeit 
+					<li>Antrag der Fraktionen CDU, BÃœNDNIS 90/DIE GRÃœNEN, Freie 
+					WÃ¤hler und FDP betreffend &quot;Bericht zur Integration in Arbeit 
 					und Entwicklung der Bedarfsgemeinschaften&quot;</li>
-					<li>Antrag der SPD-Fraktion betreffend &quot;Erfolgreiche „SchuB-Klassen“ 
-					weiterführen!&quot;</li>
+					<li>Antrag der SPD-Fraktion betreffend &quot;Erfolgreiche Â„SchuB-KlassenÂ“ 
+					weiterfÃ¼hren!&quot;</li>
 					<li>Antrag der Fraktion DIE LINKE betreffend &quot;Kooperation 
 					Schule und Sportverein&quot;</li>
 					<li>Antrag der Fraktion DIE LINKE betreffend 
-					&quot;Strompreiserhöhung aussetzen&quot;</li>
+					&quot;StrompreiserhÃ¶hung aussetzen&quot;</li>
 					<li>Antrag der Fraktion DIE LINKE betreffend &quot;Stromanbieter 
 					wechseln&quot;</li>
 					<li>Antrag der Fraktion DIE LINKE betreffend &quot;Haus- und 
-					fachärztliche Versorgung im Landkreis&quot;</li>
+					fachÃ¤rztliche Versorgung im Landkreis&quot;</li>
 				</ul>
 				<p>&nbsp;</p></td>
 			</tr>

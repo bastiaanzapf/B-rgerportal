@@ -3,13 +3,13 @@
 <head>
 <meta http-equiv="Content-Language" content="de">
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Bürgerportal Marburg-Biedenkopf</title>
+<title>BÃ¼rgerportal Marburg-Biedenkopf</title>
 <link rel="stylesheet" type="text/css" href="design/fbv-grey.css">
 </head>
 
 <body>
 
-<h2 align="center" style="text-align: right">Bürgerportal Marburg-Biedenkopf&nbsp;
+<h2 align="center" style="text-align: right">BÃ¼rgerportal Marburg-Biedenkopf&nbsp;
 (1. Entwurf)</h2>
 <table border="0" cellpadding="0" cellspacing="0" width="100%" id="table4" style="border-style: solid; border-width: 0; padding: 0">
 	<tr>
@@ -28,40 +28,40 @@
 				Beschluss zur Aufstellung des Bebauungsplanes Nr. 11/6</h5>
 				<p><u>Die Stadtverordnetenversammlung wird gebeten, folgenden
 				Beschluss zu fassen:</u><p>Zum Gedenken an das Leben und Wirken
-				von Jürgen Markus (12.09.1957 – 05.02.2010) stiftet die
-				Universitätsstadt Marburg den „Jürgen-Markus-Preis:
-				Marburg-barrierefrei“. Der mit 20.000 EUR dotierte Preis soll
-				alle 2 Jahre vergeben werden für Maßnahmen, Initiativen und
-				Projekte in der Universitätsstadt Marburg, die<br>
-				- zum Abbau von Barrieren in Straßen und Häusern,<br>
+				von JÃ¼rgen Markus (12.09.1957 Â– 05.02.2010) stiftet die
+				UniversitÃ¤tsstadt Marburg den Â„JÃ¼rgen-Markus-Preis:
+				Marburg-barrierefreiÂ“. Der mit 20.000 EUR dotierte Preis soll
+				alle 2 Jahre vergeben werden fÃ¼r MaÃŸnahmen, Initiativen und
+				Projekte in der UniversitÃ¤tsstadt Marburg, die<br>
+				- zum Abbau von Barrieren in StraÃŸen und HÃ¤usern,<br>
 				- zum Aufbau des freien Zugangs zu sozialem Leben und Kultur und<br>
 				- zur Teilhabe und Inklusion von Menschen mit und ohne
 				Behinderungen<br>
-				führen.
-				<p><font color="#FF0000">{kurze verständliche Erklärung worum es
-				bei Entscheidung genauer geht. }</font><p><u>Weiterführende Informationen:</u>
+				fÃ¼hren.
+				<p><font color="#FF0000">{kurze verstÃ¤ndliche ErklÃ¤rung worum es
+				bei Entscheidung genauer geht. }</font><p><u>WeiterfÃ¼hrende Informationen:</u>
 				<a target="_blank" href="http://www.marburg.de/de/73146">hinter
-				diesem Link</a><p><u>Weitere Anhänge:<br>
+				diesem Link</a><p><u>Weitere AnhÃ¤nge:<br>
 				</u>* Dokument_1.pdf<br>
 				* Info.jpg<form method="POST" action="--WEBBOT-SELF--" enctype="multipart/form-data">
 					<!--webbot bot="FileUpload" U-File="fpweb:///_private/form_results.csv" S-Format="TEXT/CSV" S-Label-Fields="TRUE" -->
 					<p><input type="file" name="F1" size="34"><br>
-					[Datei Hinzufügen]</p>
+					[Datei HinzufÃ¼gen]</p>
 				</form>
-				<hr><p><u>Was spricht für eine Zustimmung des
+				<hr><p><u>Was spricht fÃ¼r eine Zustimmung des
 				Antrages:</u><br>
 &nbsp; * xxxx<br>
 &nbsp; * xxxx<form method="POST" action="--WEBBOT-SELF--">
 					<!--webbot bot="SaveResults" U-File="fpweb:///_private/form_results.csv" S-Format="TEXT/CSV" S-Label-Fields="TRUE" -->
 					<p><input type="text" name="T1" size="53"><br>
-					[Punkt Hinzufügen]</p>
+					[Punkt HinzufÃ¼gen]</p>
 				</form>
 				<p><u>Was spricht gegen eine Zustimmung des Antrages:</u><br>
 &nbsp; * xxxx<br>
 &nbsp; * xxxx<form method="POST" action="--WEBBOT-SELF--">
 					<!--webbot bot="SaveResults" U-File="fpweb:///_private/form_results.csv" S-Format="TEXT/CSV" S-Label-Fields="TRUE" -->
 					<p><input type="text" name="T2" size="53"><br>
-					[Punkt Hinzufügen]</p>
+					[Punkt HinzufÃ¼gen]</p>
 				</form>
 				<hr>
 				<p>Aktuelle Kommentare zu dem Antrag:<br>
@@ -94,7 +94,7 @@
 				<form method="POST" action="--WEBBOT-SELF--">
 					<!--webbot bot="SaveResults" U-File="fpweb:///_private/form_results.csv" S-Format="TEXT/CSV" S-Label-Fields="TRUE" -->
 					<p><textarea rows="4" name="S1" cols="47"></textarea><br>
-					[Kommentar Hinzufügen]</p>
+					[Kommentar HinzufÃ¼gen]</p>
 				</form>
 				<hr>
 				<table border="1" width="100%" id="table6" style="border-width: 0">
@@ -103,15 +103,15 @@
 						Parteien zu diesem Antrag/Beschluss:</b></h6><p>CDU [22
 						Sitze]: Unbekannt<p>SPD [33 Sitze]: Antragssteller des
 						Antrages. Die SPD Fraktion stimmt wahrscheinlich
-						geschlossen für diesen Antrag<p>Grüne [11 Sitze]:
-						Befürworten diesen Antrag. Die Fraktion der Grünen
-						stimmt wahrscheinlich geschlossen für diesen Antrag<p>
+						geschlossen fÃ¼r diesen Antrag<p>GrÃ¼ne [11 Sitze]:
+						BefÃ¼rworten diesen Antrag. Die Fraktion der GrÃ¼nen
+						stimmt wahrscheinlich geschlossen fÃ¼r diesen Antrag<p>
 						Linke [1 Sitze]: Unbekannt<p>Sonst wer [2 Sitze]:
 						Unentschlossen</td>
 						<td>
 						<table border="1" width="100%" id="table7" cellspacing="0" cellpadding="0">
 							<tr>
-								<td><h6><b>Stimme ab!</b></h6><p>Soll dieser Antrag unterstützt
+								<td><h6><b>Stimme ab!</b></h6><p>Soll dieser Antrag unterstÃ¼tzt
 								werden?</td>
 							</tr>
 							<tr>
@@ -129,7 +129,7 @@
 								<font color="#FF0000">{Automatisch generierter 
 								Kuchen}</font></p>
 								<p><font size="1">Aktuell:<br>
-								44 Befürworter<br>
+								44 BefÃ¼rworter<br>
 								27 Unentschieden<br>
 								00 Ablehner<br>
 								<br>

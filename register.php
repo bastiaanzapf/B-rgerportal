@@ -3,13 +3,13 @@
 <head>
 <meta http-equiv="Content-Language" content="de">
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Bürgerportal Marburg-Biedenkopf</title>
+<title>BÃ¼rgerportal Marburg-Biedenkopf</title>
 <link rel="stylesheet" type="text/css" href="design/fbv-grey.css">
 </head>
 
 <body>
 
-<h2 align="center" style="text-align: right">Bürgerportal Marburg-Biedenkopf&nbsp;
+<h2 align="center" style="text-align: right">BÃ¼rgerportal Marburg-Biedenkopf&nbsp;
 (1. Entwurf)</h2>
 <table border="0" cellpadding="0" cellspacing="0" width="100%" id="table4" style="border-style: solid; border-width: 0; padding: 0">
 	<tr>
