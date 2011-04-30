@@ -20,6 +20,7 @@
 	<tr>
 		<td style="padding:5px 0px 5px 0px;">
 		<?php require_once("include/menu-global.txt");?>
+		
 		<div align="center">
 		<table border="1" width="750" id="table2" cellspacing="1" cellpadding="2">
 			<tr>
