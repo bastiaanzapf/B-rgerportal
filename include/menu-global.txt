@@ -9,9 +9,9 @@
 		<h5>&nbsp;<a href="Kreistag.php">Kreistag MR-BID</a></h5>
 		<h6>&nbsp;&nbsp;&nbsp;<a href="Kreistag.php">Aktuelle Themen</a></h6>
 		<h6>&nbsp;&nbsp;&nbsp;<a href="Kreistag.php">Themen Chronik</a></h6>
-		<h5>&nbsp;<a href="index.php">Aktuelle Bürgerbegehren</a></h5>
+		<h5>&nbsp;<a href="index.php">Aktuelle BÃ¼rgerbegehren</a></h5>
 		<h5>&nbsp;<a href="index.php">Hilfsmittel</a></h5>
-		<h6>&nbsp;&nbsp;&nbsp;<a href="index.php">HowTo Bürgerbegehren</a></h6>
+		<h6>&nbsp;&nbsp;&nbsp;<a href="index.php">HowTo BÃ¼rgerbegehren</a></h6>
 		<h6>&nbsp;&nbsp;&nbsp;<a href="index.php">Veranstaltungskalender</a></h6>
 		<h5>&nbsp;<a href="register.php">Mitmachen</a></h5>
 		<h6>&nbsp;&nbsp;&nbsp;<a href="login.php">login</a></h6>
