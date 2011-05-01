@@ -12,54 +12,38 @@ SET escape_string_warning = off;
 SET search_path = public, pg_catalog;
 
 --
--- Name: objekt_typ; Type: TYPE; Schema: public; Owner: basti
---
-
-CREATE TYPE objekt_typ AS ENUM (
-    'sitzung',
-    'tagesordnung',
-    'tagesordnungspunkt',
-    'vorlage',
-    'niederschrift',
-    'unspezifiziert'
-);
-
-
-ALTER TYPE public.objekt_typ OWNER TO basti;
-
---
--- Name: referenz_typ; Type: TYPE; Schema: public; Owner: basti
+-- Name: referenz_typ; Type: TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE referenz_typ AS ENUM (
     'tagesordnung',
     'tagesordnungspunkt',
-    'vorlage'
+    'vorlage',
+    'sitzungskalender',
+    'anwesenheitsliste'
 );
 
-
-ALTER TYPE public.referenz_typ OWNER TO basti;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: instanz; Type: TABLE; Schema: public; Owner: basti; Tablespace: 
+-- Name: instanz; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE instanz (
     instanz_id integer NOT NULL,
     referenz_id integer,
     retrieved timestamp without time zone,
-    content oid
+    content bytea,
+    hash text,
+    parsed timestamp without time zone
 );
 
 
-ALTER TABLE public.instanz OWNER TO basti;
-
 --
--- Name: instanz_instanz_id_seq; Type: SEQUENCE; Schema: public; Owner: basti
+-- Name: instanz_instanz_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE instanz_instanz_id_seq
@@ -70,17 +54,15 @@ CREATE SEQUENCE instanz_instanz_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.instanz_instanz_id_seq OWNER TO basti;
-
 --
--- Name: instanz_instanz_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: basti
+-- Name: instanz_instanz_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE instanz_instanz_id_seq OWNED BY instanz.instanz_id;
 
 
 --
--- Name: referenz; Type: TABLE; Schema: public; Owner: basti; Tablespace: 
+-- Name: referenz; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE referenz (
@@ -96,10 +78,8 @@ CREATE TABLE referenz (
 );
 
 
-ALTER TABLE public.referenz OWNER TO basti;
-
 --
--- Name: referenz_referenz_id_seq; Type: SEQUENCE; Schema: public; Owner: basti
+-- Name: referenz_referenz_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE referenz_referenz_id_seq
@@ -110,31 +90,37 @@ CREATE SEQUENCE referenz_referenz_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.referenz_referenz_id_seq OWNER TO basti;
-
 --
--- Name: referenz_referenz_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: basti
+-- Name: referenz_referenz_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE referenz_referenz_id_seq OWNED BY referenz.referenz_id;
 
 
 --
--- Name: instanz_id; Type: DEFAULT; Schema: public; Owner: basti
+-- Name: instanz_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE instanz ALTER COLUMN instanz_id SET DEFAULT nextval('instanz_instanz_id_seq'::regclass);
 
 
 --
--- Name: referenz_id; Type: DEFAULT; Schema: public; Owner: basti
+-- Name: referenz_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE referenz ALTER COLUMN referenz_id SET DEFAULT nextval('referenz_referenz_id_seq'::regclass);
 
 
 --
--- Name: instanz_instanz_id_key; Type: CONSTRAINT; Schema: public; Owner: basti; Tablespace: 
+-- Name: instanz_hash_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY instanz
+    ADD CONSTRAINT instanz_hash_key UNIQUE (hash);
+
+
+--
+-- Name: instanz_instanz_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY instanz
@@ -142,7 +128,15 @@ ALTER TABLE ONLY instanz
 
 
 --
--- Name: referenz_referenz_id_key; Type: CONSTRAINT; Schema: public; Owner: basti; Tablespace: 
+-- Name: referenz_original_key_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY referenz
+    ADD CONSTRAINT referenz_original_key_key UNIQUE (original_key);
+
+
+--
+-- Name: referenz_referenz_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY referenz
@@ -150,7 +144,7 @@ ALTER TABLE ONLY referenz
 
 
 --
--- Name: instanz_referenz_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: basti
+-- Name: instanz_referenz_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY instanz
@@ -158,7 +152,7 @@ ALTER TABLE ONLY instanz
 
 
 --
--- Name: referenz_instanz_entnommen_fkey; Type: FK CONSTRAINT; Schema: public; Owner: basti
+-- Name: referenz_instanz_entnommen_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY referenz
@@ -166,7 +160,7 @@ ALTER TABLE ONLY referenz
 
 
 --
--- Name: referenz_parent_fkey; Type: FK CONSTRAINT; Schema: public; Owner: basti
+-- Name: referenz_parent_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY referenz
@@ -174,7 +168,7 @@ ALTER TABLE ONLY referenz
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: postgres
+-- Name: public; Type: ACL; Schema: -; Owner: -
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
