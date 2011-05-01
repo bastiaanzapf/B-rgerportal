@@ -23,6 +23,17 @@ function find_domelement_class_regex($accum,$node,$params) {
   return $accum;
 }
 
+function find_domelement_id(&$accum,$node,$params) {
+  if (get_class($node)=="DOMElement") {    
+    if ($node->hasAttribute('id')) {
+      if ($params['id']==$node->getAttribute("id")) {
+	$accum[]=$node;
+      }
+    }
+  }
+}
+
+
 function parse_table(&$accum,$node,$params) {
   $column=&$accum['column'];
   $line=&$accum['line'];
@@ -40,9 +51,11 @@ function parse_table(&$accum,$node,$params) {
     }
   }
 
-  if (isset($params[$column])) 
-    $params[$column](&$accum,$node,array('line'=>$line,'column'=>$column,
-					 'baseurl'=>$params['baseurl']));
+  $localconfig=array('line'=>$line,'column'=>$column);
+
+  if (isset($params[$column]))  {
+    $params[$column](&$accum,$node,array_merge($localconfig,$params));
+  }
 }
 
 function getqueryasarray($url) {
@@ -63,7 +76,7 @@ function insert_top($pid,$iid,$nr,$betreff,$detailsurl,$vokey,$vourl) {
   }
 }
 
-function assert_referenz_id($typ,$original_key,$original_description,$pid,$position,$instanz_entnummen,$url,$post) {
+function assert_referenz_id($typ,$original_key,$original_description,$pid,$position,$instanz_entnommen,$url,$post) {
   $result=pg_query_params('SELECT referenz_id FROM referenz WHERE original_key=$1',
 			  array($original_key));
   if (pg_num_rows($result)) {
@@ -74,7 +87,7 @@ function assert_referenz_id($typ,$original_key,$original_description,$pid,$posit
   pg_query_params('INSERT INTO referenz (typ,original_key,original_description,parent,position,instanz_entnommen,url,post) '.
 		  'VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
 		  array($typ,$original_key,$original_description,
-			$pid,$position,$instanz_entnummen,
+			$pid,$position,$instanz_entnommen,
 			$url,$post));
   $result=pg_query("SELECT currval('referenz_referenz_id_seq')");
   $id=pg_fetch_row($result);

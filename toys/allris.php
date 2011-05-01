@@ -76,8 +76,10 @@ function parse_to($doc,$baseurl) {
 function datum($accum,$node,$params) {
   $line=$accum['line'];
   if (get_class($node)=='DOMText') {
-    if (preg_match('[0-9]+',$node->nodeValue))
-      $accum['parsed-data'][$line]['datum']=$params['firstday'];
+    if (preg_match('/[0-9]+/',$node->nodeValue)) {
+      $tag=preg_replace('/[^0-9]/','',$node->nodeValue);
+      $accum['parsed-data'][$line]['datum']=$params['jahr'].'-'.$params['monat'].'-'.sprintf("%02s",$tag);
+    }
   }
   return $accum;
 }
@@ -85,18 +87,25 @@ function datum($accum,$node,$params) {
 
 function parse_sk($doc,$baseurl) {
 
-  $firstday=$doc->getElementById('kaldatvon');
-  var_dump($firstday);die();
   //  preg_match('//',$firstday
   //  ->getAttribute('value');
 
   $tables=$doc->getElementsByTagName('table');
 
+  $a=array();
+  map_to_children($a,'find_domelement_id',$doc,array('id'=>'kaldatvon'));
+  if ($a[0]) {
+    $firstday=$a[0]->getAttribute('value');
+    preg_match('/^([0-9]+)\.([0-9]+)\.([0-9]+)$/',$firstday,$matches);
+    list($dummy,$tag,$monat,$jahr)=$matches;
+  } else {
+    throw new Exception("Kein Datum?");
+  }
   foreach ($tables as $t) {    
-    if ($t->getAttribute("class")=="tl1") {
-      
+    if ($t->getAttribute("class")=="tl1") {      
       $config=array('baseurl'=>$baseurl,
-		    'firstday'=>$firstday,
+		    'jahr'=>$jahr,
+		    'monat'=>$monat,
 		    2 => 'datum',
 		    4 => 'to_link',
 		    5 => 'betreff');
@@ -168,16 +177,14 @@ function parse_sk_instance($iid) {
   $doc = new DOMDocument();
   $doc->loadHTML(pg_unescape_bytea($ref['content']));
   $sk=parse_sk($doc,$baseurl);
+  foreach ($sk['parsed-data'] as $ll=>$l) {
+    if (isset($l['betreff']) ) {
+      echo "*** ".$l['datum']." ***\n";
 
-  var_dump($sk);
-  die();
-  foreach ($sk as $l) {
-    //$original_key,$original_description,$pid,$position,$instanz_entnummen,$url,$post)
-    assert_referenz_id('tagesordnung','');
+      assert_referenz_id('tagesordnung','?-SI-'.$l['datum'],$l['betreff'],$ref['referenz_id'],$ll,$iid,$l['tourl'],$l['post']);
+    }
+	   //    assert_referenz_id('tagesordnung','');
   }
-  if ($GLOBALS['k']++>2)
-    die();
-  return;
   pg_query_params('UPDATE instanz SET parsed=NOW() '.
 		  'WHERE instanz_id=$1',
 		  array($iid)
