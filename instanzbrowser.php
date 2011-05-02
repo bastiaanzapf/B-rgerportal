@@ -1,7 +1,19 @@
 <?
+require('database.php');
+
+
+if (isset($_REQUEST['instance'])) {
+  $p=array($_REQUEST['instance']);
+  $result=pg_query_params("SELECT * ".
+			  "FROM instanz WHERE instanz_id=$1",$p);
+  
+  $row=pg_fetch_assoc($result);
+  header('Content-Type: '.$row['content_type_reported']);
+  echo pg_unescape_bytea(pg_unescape_bytea($row['content'])); // ???
+  die();
+}
 
 require('header.php');
-require('database.php');
 
 if (isset($_REQUEST['reference'])) {
   $p=array($_REQUEST['reference']);
@@ -23,7 +35,7 @@ if (isset($_REQUEST['reference'])) {
 
 echo "<table>";
 while($row=pg_fetch_assoc($result)) {
-  echo "<tr><td>$row[instanz_id]</td><td>$row[retrieved]</td><td>$row[hash]</td></tr>";
+  echo "<tr><td>$row[instanz_id]</td><td>$row[retrieved]</td><td><a href='?instance=$row[instanz_id]'>$row[hash]</a></td></tr>";
 }
 echo "</table>";
 

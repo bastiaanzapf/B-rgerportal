@@ -94,7 +94,10 @@ function assert_referenz_id($typ,$original_key,$original_description,$pid,$posit
   return $id[0];
 }
 
-function download_instance($rid) {
+function download_instance($rid,$todbcoding) {
+  if (!$todbcoding) {
+    throw new Exception("Keine Zeichensatzübersetzung angegeben (identität?)");
+  }
   $dbresult=pg_query_params('SELECT * FROM referenz WHERE referenz_id=$1',
 		  array($rid));
   $ref=pg_fetch_assoc($dbresult);
@@ -110,21 +113,13 @@ function download_instance($rid) {
   }
   curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
   $result= curl_exec ($curl);
+  $contenttype= curl_getinfo($curl,CURLINFO_CONTENT_TYPE);
   //  var_dump($result);die();
   curl_close ($curl);
 
   //echo $result;
-
-  $config = array(
-		  'indent'         => true,
-		  'output-xhtml'   => true,
-		  'wrap'           => 200);
-
-  $tidy = new tidy;
-  $tidy->parseString($result, $config, 'utf8'); // XXX charset?
-  $tidy->cleanRepair();
   
-  $hash=sha1($tidy);  
+  $hash=sha1($result);  
 
   $samehash=pg_query_params('SELECT instanz_id,retrieved FROM instanz WHERE '.
 			    'hash=$1',
@@ -134,10 +129,21 @@ function download_instance($rid) {
     throw new UserException("Keine inhaltliche Änderung gegenüber Instanz $data[instanz_id] (abgerufen $data[retrieved])");
   }
 
+  if ($contenttype=='text/html') {
+    $utf8_encoded_result=$todbcoding($result);
+  }
+  else
+    $utf8_encoded_result=$result;
+
   pg_query_params(
-	     'INSERT INTO instanz (referenz_id,retrieved,content,hash) '.
-	     'VALUES ($1,NOW(),$2,$3)',
-	     array($rid,$tidy,sha1($tidy)));
+	     'INSERT INTO instanz (referenz_id,retrieved,content,hash,content_type_reported) '.
+	     'VALUES ($1,NOW(),$2::bytea,$3,$4)',
+	     array($rid,pg_escape_bytea($utf8_encoded_result),sha1($result),$contenttype));
+
+  $result=pg_query("SELECT CURRVAL('instanz_instanz_id_seq')");
+  echo pg_last_error();
+  $row=pg_fetch_row($result);
+  return $row[0];
 
 }
 

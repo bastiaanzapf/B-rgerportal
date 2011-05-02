@@ -139,8 +139,7 @@ function parse_to_instance($iid) {
 
   $doc = new DOMDocument();
 
-  $doc->loadHTML(pg_unescape_bytea($ref['content']));
-
+  $doc->loadHTML(tidy_repair_string(pg_unescape_bytea($ref['content']),array(),'utf8'));
   $to=parse_to($doc,$baseurl);
 
   $to=$to['parsed-data'];
@@ -175,12 +174,10 @@ function parse_sk_instance($iid) {
   $baseurl=$x['scheme'].'://'.$x['host'].preg_replace('|/[^/]*$|','/',$x['path']);
 
   $doc = new DOMDocument();
-  $doc->loadHTML(pg_unescape_bytea($ref['content']));
+  $doc->loadHTML(tidy_repair_string(pg_unescape_bytea($ref['content']),array(),'utf8'));
   $sk=parse_sk($doc,$baseurl);
   foreach ($sk['parsed-data'] as $ll=>$l) {
     if (isset($l['betreff']) ) {
-      echo "*** ".$l['datum']." ***\n";
-
       assert_referenz_id('tagesordnung','?-SI-'.$l['datum'],$l['betreff'],$ref['referenz_id'],$ll,$iid,$l['tourl'],$l['post']);
     }
 	   //    assert_referenz_id('tagesordnung','');

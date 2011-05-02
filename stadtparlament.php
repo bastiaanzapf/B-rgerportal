@@ -29,6 +29,7 @@
 				vertreten. Mit diesen kann hier über kommende Anstimmungen in
 				der nächsten Sitzung des Stadtparlamentes diskutiert werden.</p>
 				<p>Nächster Termin...</p>
+				<p><a href='factsbrowser.php'>Fakten-Browser</a></p>
 				<p>Aktuelle Entscheidungen die anstehen:<font color="#FF0000">
 				{Entweder nach TO sortieren oder automatisch nach Relevanz (bsp.
 				Klicks)}</font></p>
