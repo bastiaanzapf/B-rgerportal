@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName " ##### Benutze portal/portal ##### "
+AuthUserFile /var/www/B-rgerportal/.htpasswd
+Require user portal
