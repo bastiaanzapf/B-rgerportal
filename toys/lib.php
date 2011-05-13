@@ -65,14 +65,11 @@ function getqueryasarray($url) {
 }
 
 function insert_top($pid,$iid,$nr,$betreff,$detailsurl,$vokey,$vourl) {
-  if (!isset($GLOBALS['insert_top_prepared'])) {
-    $GLOBALS['insert_top_prepared']=true;
-    pg_prepare('insert_r_top','INSERT INTO referenz (typ,parent,instanz_entnommen,position,url,original_description) VALUES (\'tagesordnungspunkt\',$1,$2,$3,$4,$5)');
-    pg_prepare('insert_r_vo','INSERT INTO referenz (typ,parent,instanz_entnommen,position,original_key,url) VALUES (\'vorlage\',$1,$2,$3,$4,$5)');
-  }
-  pg_execute('insert_r_top',array($pid,$iid,$nr,$detailsurl,$betreff));  
+  pg_query_params('INSERT INTO referenz (typ,parent,instanz_entnommen,position,url,original_description) VALUES (\'tagesordnungspunkt\',$1,$2,$3,$4,$5)',array($pid,$iid,$nr,$detailsurl,$betreff));  
   if ($vokey || $vourl) {
-    pg_execute('insert_r_vo',array($pid,$iid,$nr,$vokey,$vourl));  
+    $result=pg_query('SELECT CURRVAL(referenz_id_seq)');
+    $row=pg_fetch_row($result);
+    pg_query_params('INSERT INTO referenz (typ,parent,instanz_entnommen,position,original_key,url) VALUES (\'vorlage\',$1,$2,$3,$4,$5)',array($pid,$row[0],$nr,$vokey,$vourl));  
   }
 }
 
