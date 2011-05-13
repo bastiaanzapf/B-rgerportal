@@ -38,7 +38,8 @@ CREATE TABLE instanz (
     retrieved timestamp without time zone,
     content bytea,
     hash text,
-    parsed timestamp without time zone
+    parsed timestamp without time zone,
+    content_type_reported text
 );
 
 
@@ -74,7 +75,8 @@ CREATE TABLE referenz (
     "position" integer,
     instanz_entnommen integer,
     typ referenz_typ,
-    original_description text
+    original_description text,
+    do_not_download boolean
 );
 
 
@@ -144,6 +146,14 @@ ALTER TABLE ONLY referenz
 
 
 --
+-- Name: referenz_url_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY referenz
+    ADD CONSTRAINT referenz_url_key UNIQUE (url, post);
+
+
+--
 -- Name: instanz_referenz_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -165,16 +175,6 @@ ALTER TABLE ONLY referenz
 
 ALTER TABLE ONLY referenz
     ADD CONSTRAINT referenz_parent_fkey FOREIGN KEY (parent) REFERENCES referenz(referenz_id);
-
-
---
--- Name: public; Type: ACL; Schema: -; Owner: -
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
