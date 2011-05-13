@@ -5,7 +5,7 @@ require('database.php');
 
 if (isset($_REQUEST['children_of'])) {
   $p=$_REQUEST['children_of'];
-  if (isset($_REQUEST['instanz_entnommen'])) {
+  if (isset($_REQUEST['instanz_entnommen']) && $_REQUEST['instanz_entnommen']) {
     $pa=array($p,$_REQUEST['instanz_entnommen']);
   } else {
     $pa=array($p,null);
@@ -27,9 +27,14 @@ if (isset($_REQUEST['children_of'])) {
   $result=pg_query("SELECT * FROM referenz WHERE typ='tagesordnung' ORDER BY original_key DESC");
 } 
 
+
+
 echo "<table>";
 while($row=pg_fetch_assoc($result)) {
-  echo "<tr><td><a href='instanzbrowser.php?reference=$row[referenz_id]'>$row[original_key]</a></td><td><a href='?children_of=$row[referenz_id]'>".pg_unescape_bytea($row['original_description'])."</a></td></tr>";
+  if (empty($row['original_key'])) {
+    $row['original_key']="Kein Schlüssel";
+  }
+  echo "<tr><td>$row[typ]</td><td><a href='instanzbrowser.php?reference=$row[referenz_id]'>$row[original_key]</a></td><td><a href='?children_of=$row[referenz_id]'>".pg_unescape_bytea($row['original_description'])."</a></td></tr>";
 }
 echo "</table>";
 

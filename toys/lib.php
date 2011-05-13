@@ -66,10 +66,14 @@ function getqueryasarray($url) {
 
 function insert_top($pid,$iid,$nr,$betreff,$detailsurl,$vokey,$vourl) {
   pg_query_params('INSERT INTO referenz (typ,parent,instanz_entnommen,position,url,original_description) VALUES (\'tagesordnungspunkt\',$1,$2,$3,$4,$5)',array($pid,$iid,$nr,$detailsurl,$betreff));  
+  $result=pg_query("SELECT CURRVAL('referenz_referenz_id_seq')");
+  $row=pg_fetch_row($result);
+  $rid=$row[0];
   if ($vokey || $vourl) {
-    $result=pg_query('SELECT CURRVAL(referenz_id_seq)');
-    $row=pg_fetch_row($result);
-    pg_query_params('INSERT INTO referenz (typ,parent,instanz_entnommen,position,original_key,url) VALUES (\'vorlage\',$1,$2,$3,$4,$5)',array($pid,$row[0],$nr,$vokey,$vourl));  
+    $result2=pg_query_params('SELECT NULL FROM referenz WHERE original_key=$1',array($vokey));
+    if (!pg_num_rows($result2)) {
+      pg_query_params('INSERT INTO referenz (typ,parent,instanz_entnommen,position,original_key,url) VALUES (\'vorlage\',$1,$2,$3,$4,$5)',array($pid,$rid,$nr,$vokey,$vourl));  
+    }
   }
 }
 

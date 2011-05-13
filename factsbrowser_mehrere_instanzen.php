@@ -1,5 +1,5 @@
 <?
-echo "factsbroser_mehrere_instanzen.php";
+echo "Es liegen mehrere Instanzen vor, denen diese Referenz entnommen wurde.";
 
 if (isset($_REQUEST['children_of'])) {
   $p=array($_REQUEST['children_of']);

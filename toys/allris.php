@@ -29,6 +29,7 @@ function to_link($accum,$node,$params) {
 	$accum['parsed-data'][$line]['post']='SILFDNR='.$node->getAttribute('value').'&options=8';
       } 
     }
+
   }
   return $accum;
 }
@@ -39,6 +40,13 @@ function betreff($accum,$node,$params) {
     $accum['parsed-data'][$line]['betreff']='';
   if (get_class($node)=='DOMText') {
     $accum['parsed-data'][$line]['betreff'].=trim($node->nodeValue);
+  }
+  if ($node->tagName=='a') {
+    if ($link=preg_match('/^to020.asp/',$node->getAttribute('href'))) {
+      $accum['parsed-data'][$line]['betreffurl']=$node->getAttribute('href');
+    } else {
+      throw new UserException("Unexpected Link found: ".$node->getAttribute('href'));
+    }     
   }
   return $accum;
 }
@@ -146,20 +154,20 @@ function parse_to_instance($iid) {
 
   $i=1;
   foreach ($to as $top) {
-    if (isset($top['detailsurl'])) {
+    if (isset($top['betreffurl'])) {
       if (empty($top['vokey'])) {
 	$top['vokey']=null;
       }
       if (empty($top['vourl'])) {
 	$top['vourl']=null;
       }
-      insert_top($ref['referenz_id'],$ref['instanz_id'],$top['topnr'],$top['betreff'],$top['detailsurl'],$top['vokey'],$top['vourl']);
+      insert_top($ref['referenz_id'],$ref['instanz_id'],$top['topnr'],$top['betreff'],$top['betreffurl'],$top['vokey'],$top['vourl']);
     }
   }
-  pg_query_params('UPDATE instanz SET parsed=NOW() '.
+  /*  pg_query_params('UPDATE instanz SET parsed=NOW() '.
 		  'WHERE instanz_id=$1',
 		  array($iid)
-		  );
+		  );*/
 }
 
 

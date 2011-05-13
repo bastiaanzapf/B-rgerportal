@@ -1,8 +1,8 @@
 <?
 
-require('database.php');
-require('lib.php');
-require('allris.php');
+require('../database.php');
+require('../lib.php');
+require('../allris.php');
 
 if (pg_client_encoding()!='UTF8') { 
   pg_set_client_encoding('UTF8');
@@ -30,6 +30,18 @@ if (!pg_num_rows($result)) {
     }
   }
  }
+
+
+$result=pg_query("SELECT referenz_id FROM referenz WHERE typ='sitzungskalender'");
+
+while ($row=pg_fetch_assoc($result)) {
+  try {
+    download_instance($row['referenz_id'],'latin1_to_utf8');
+  } catch (UserException $e) {
+    echo "Referenz $row[referenz_id]: ".$e->getMessage()."\n";
+  }
+}
+
 
 $result=pg_query("SELECT instanz_id ".
 		 "FROM referenz JOIN instanz USING (referenz_id) ".

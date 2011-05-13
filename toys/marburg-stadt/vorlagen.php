@@ -1,9 +1,9 @@
 <?
 
-require('database.php');
-require('lib.php');
-require('allris.php');
-require('charset.php');
+require('../database.php');
+require('../lib.php');
+require('../allris.php');
+require('../charset.php');
 //download_instance(1);
 
 //$result=pg_query("SELECT referenz_id,original_description,original_key FROM referenz WHERE referenz_id=8301");
