@@ -65,29 +65,31 @@ function getqueryasarray($url) {
 }
 
 function insert_top($pid,$iid,$nr,$betreff,$detailsurl,$vokey,$vourl) {
-  pg_query_params('INSERT INTO referenz (typ,parent,instanz_entnommen,position,url,original_description) VALUES (\'tagesordnungspunkt\',$1,$2,$3,$4,$5)',array($pid,$iid,$nr,$detailsurl,$betreff));  
+  assert(!empty($GLOBALS['mandant']));
+  pg_query_params('INSERT INTO referenz (mandant_id,typ,parent,instanz_entnommen,position,url,original_description) VALUES (\'tagesordnungspunkt\',$1,$2,$3,$4,$5)',array($GLOBALS['mandant'],$pid,$iid,$nr,$detailsurl,$betreff));  
   $result=pg_query("SELECT CURRVAL('referenz_referenz_id_seq')");
   $row=pg_fetch_row($result);
   $rid=$row[0];
   if ($vokey || $vourl) {
-    $result2=pg_query_params('SELECT NULL FROM referenz WHERE original_key=$1',array($vokey));
+    $result2=pg_query_params('SELECT NULL FROM referenz WHERE mandant_id=$1 AND original_key=$2',array($GLOBALS['mandant'],$vokey));
     if (!pg_num_rows($result2)) {
-      pg_query_params('INSERT INTO referenz (typ,parent,instanz_entnommen,position,original_key,url) VALUES (\'vorlage\',$1,$2,$3,$4,$5)',array($pid,$rid,$nr,$vokey,$vourl));  
+      pg_query_params('INSERT INTO referenz (mandant_id,typ,parent,instanz_entnommen,position,original_key,url) VALUES (\'vorlage\',$2,$3,$4,$5,$6)',array($GLOBALS['mandant'],$pid,$rid,$nr,$vokey,$vourl));  
     }
   }
 }
 
 function assert_referenz_id($typ,$original_key,$original_description,$pid,$position,$instanz_entnommen,$url,$post) {
-  $result=pg_query_params('SELECT referenz_id FROM referenz WHERE original_key=$1',
-			  array($original_key));
+  assert(!empty($GLOBALS['mandant']));
+  $result=pg_query_params('SELECT referenz_id FROM referenz WHERE mandant_id=$1 AND original_key=$2',
+			  array($GLOBALS['mandant'],$original_key));
   if (pg_num_rows($result)) {
     $ref=pg_fetch_assoc($result);
     return $ref['referenz_id'];
   }
 
-  pg_query_params('INSERT INTO referenz (typ,original_key,original_description,parent,position,instanz_entnommen,url,post) '.
+  pg_query_params('INSERT INTO referenz (mandant_id,typ,original_key,original_description,parent,position,instanz_entnommen,url,post) '.
 		  'VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
-		  array($typ,$original_key,$original_description,
+		  array($GLOBALS['mandant'],$typ,$original_key,$original_description,
 			$pid,$position,$instanz_entnommen,
 			$url,$post));
   $result=pg_query("SELECT currval('referenz_referenz_id_seq')");
@@ -96,11 +98,13 @@ function assert_referenz_id($typ,$original_key,$original_description,$pid,$posit
 }
 
 function download_instance($rid,$todbcoding) {
+  assert(!empty($GLOBALS['mandant']));
+
   if (!$todbcoding) {
     throw new Exception("Keine Zeichensatzübersetzung angegeben (identität?)");
   }
-  $dbresult=pg_query_params('SELECT * FROM referenz WHERE referenz_id=$1',
-		  array($rid));
+  $dbresult=pg_query_params('SELECT * FROM referenz WHERE mandant_id=$1 AND referenz_id=$2',
+			    array($GLOBALS['mandant'],$rid));
   $ref=pg_fetch_assoc($dbresult);
 
   if (empty($ref))
@@ -123,8 +127,8 @@ function download_instance($rid,$todbcoding) {
   $hash=sha1($result);  
 
   $samehash=pg_query_params('SELECT instanz_id,retrieved FROM instanz WHERE '.
-			    'hash=$1',
-			    array($hash));
+			    'hash=$2 AND mandant_id=$1',
+			    array($GLOBALS['mandant'],$hash));
   if (pg_num_rows($samehash)) {
     $data=pg_fetch_assoc($samehash);
     throw new UserException("Keine inhaltliche Änderung gegenüber Instanz $data[instanz_id] (abgerufen $data[retrieved])");
@@ -137,9 +141,9 @@ function download_instance($rid,$todbcoding) {
     $utf8_encoded_result=$result;
 
   pg_query_params(
-	     'INSERT INTO instanz (referenz_id,retrieved,content,hash,content_type_reported) '.
-	     'VALUES ($1,NOW(),$2::bytea,$3,$4)',
-	     array($rid,pg_escape_bytea($utf8_encoded_result),sha1($result),$contenttype));
+	     'INSERT INTO instanz (mandant_id,referenz_id,retrieved,content,hash,content_type_reported) '.
+	     'VALUES ($1,$2,NOW(),$3::bytea,$4,$5)',
+	     array($GLOBALS['mandant'],$rid,pg_escape_bytea($utf8_encoded_result),sha1($result),$contenttype));
 
   $result=pg_query("SELECT CURRVAL('instanz_instanz_id_seq')");
   echo pg_last_error();

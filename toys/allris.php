@@ -42,10 +42,8 @@ function betreff($accum,$node,$params) {
     $accum['parsed-data'][$line]['betreff'].=trim($node->nodeValue);
   }
   if ($node->tagName=='a') {
-    if ($link=preg_match('/^to020.asp/',$node->getAttribute('href'))) {
-      $accum['parsed-data'][$line]['betreffurl']=$node->getAttribute('href');
-    } else {
-      throw new UserException("Unexpected Link found: ".$node->getAttribute('href'));
+    if ($link=$node->getAttribute('href')) {
+      $accum['parsed-data'][$line]['betreffurl']=$params['baseurl'].$node->getAttribute('href');
     }     
   }
   return $accum;
