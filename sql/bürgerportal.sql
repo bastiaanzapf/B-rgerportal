@@ -29,6 +29,36 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: benutzer; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE benutzer (
+    mandant_id integer,
+    benutzer_id integer NOT NULL,
+    bezeichnung text
+);
+
+
+--
+-- Name: benutzer_benutzer_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE benutzer_benutzer_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- Name: benutzer_benutzer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE benutzer_benutzer_id_seq OWNED BY benutzer.benutzer_id;
+
+
+--
 -- Name: instanz; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -39,7 +69,8 @@ CREATE TABLE instanz (
     content bytea,
     hash text,
     parsed timestamp without time zone,
-    content_type_reported text
+    content_type_reported text,
+    mandant_id integer
 );
 
 
@@ -63,6 +94,16 @@ ALTER SEQUENCE instanz_instanz_id_seq OWNED BY instanz.instanz_id;
 
 
 --
+-- Name: mandant; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE mandant (
+    mandant_id integer NOT NULL,
+    bezeichnung text
+);
+
+
+--
 -- Name: referenz; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -76,7 +117,8 @@ CREATE TABLE referenz (
     instanz_entnommen integer,
     typ referenz_typ,
     original_description text,
-    do_not_download boolean
+    do_not_download boolean,
+    mandant_id integer NOT NULL
 );
 
 
@@ -100,6 +142,13 @@ ALTER SEQUENCE referenz_referenz_id_seq OWNED BY referenz.referenz_id;
 
 
 --
+-- Name: benutzer_id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE benutzer ALTER COLUMN benutzer_id SET DEFAULT nextval('benutzer_benutzer_id_seq'::regclass);
+
+
+--
 -- Name: instanz_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -114,6 +163,14 @@ ALTER TABLE referenz ALTER COLUMN referenz_id SET DEFAULT nextval('referenz_refe
 
 
 --
+-- Name: benutzer_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY benutzer
+    ADD CONSTRAINT benutzer_pkey PRIMARY KEY (benutzer_id);
+
+
+--
 -- Name: instanz_hash_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -122,27 +179,27 @@ ALTER TABLE ONLY instanz
 
 
 --
--- Name: instanz_instanz_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: instanz_mandant_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY instanz
-    ADD CONSTRAINT instanz_instanz_id_key UNIQUE (instanz_id);
+    ADD CONSTRAINT instanz_mandant_id_key UNIQUE (mandant_id, instanz_id);
 
 
 --
--- Name: referenz_original_key_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: mandant_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY mandant
+    ADD CONSTRAINT mandant_pkey PRIMARY KEY (mandant_id);
+
+
+--
+-- Name: referenz_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY referenz
-    ADD CONSTRAINT referenz_original_key_key UNIQUE (original_key);
-
-
---
--- Name: referenz_referenz_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY referenz
-    ADD CONSTRAINT referenz_referenz_id_key UNIQUE (referenz_id);
+    ADD CONSTRAINT referenz_pkey PRIMARY KEY (mandant_id, referenz_id);
 
 
 --
@@ -154,27 +211,49 @@ ALTER TABLE ONLY referenz
 
 
 --
--- Name: instanz_referenz_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fki_; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX fki_ ON referenz USING btree (mandant_id, instanz_entnommen);
+
+
+--
+-- Name: fki_referenz; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX fki_referenz ON instanz USING btree (mandant_id, referenz_id);
+
+
+--
+-- Name: benutzer_mandant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY benutzer
+    ADD CONSTRAINT benutzer_mandant_id_fkey FOREIGN KEY (mandant_id) REFERENCES mandant(mandant_id);
+
+
+--
+-- Name: referenz; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY instanz
-    ADD CONSTRAINT instanz_referenz_id_fkey FOREIGN KEY (referenz_id) REFERENCES referenz(referenz_id);
+    ADD CONSTRAINT referenz FOREIGN KEY (mandant_id, referenz_id) REFERENCES referenz(mandant_id, referenz_id);
 
 
 --
--- Name: referenz_instanz_entnommen_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY referenz
-    ADD CONSTRAINT referenz_instanz_entnommen_fkey FOREIGN KEY (instanz_entnommen) REFERENCES instanz(instanz_id);
-
-
---
--- Name: referenz_parent_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: referenz_mandant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY referenz
-    ADD CONSTRAINT referenz_parent_fkey FOREIGN KEY (parent) REFERENCES referenz(referenz_id);
+    ADD CONSTRAINT referenz_mandant_id_fkey FOREIGN KEY (mandant_id) REFERENCES mandant(mandant_id);
+
+
+--
+-- Name: referenz_mandant_id_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY referenz
+    ADD CONSTRAINT referenz_mandant_id_fkey1 FOREIGN KEY (mandant_id, instanz_entnommen) REFERENCES instanz(mandant_id, instanz_id);
 
 
 --
