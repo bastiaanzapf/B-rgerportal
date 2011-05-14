@@ -3,7 +3,7 @@
 		<td>
 		<h5>&nbsp;<br>
 		&nbsp;<a href="index.php">Startseite</a></h5>
-		<h5>&nbsp;<a href="stadtparlament.php">Stadtpralament MR</a></h5>
+		<h5>&nbsp;<a href="stadtparlament.php">Stadtparlament MR</a></h5>
 		<h6>&nbsp;&nbsp;&nbsp;<a href="stadtparlament.php">Aktuelle Themen</a></h6>
 		<h6>&nbsp;&nbsp;&nbsp;<a href="stadtparlament_chronic.php">Themen Chronik</a></h6>
 		<h5>&nbsp;<a href="Kreistag.php">Kreistag MR-BID</a></h5>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Language" content="de">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>BÃ¼rgerportal Marburg-Biedenkopf</title>
+<title>Bürgerportal Marburg-Biedenkopf</title>
 <link rel="stylesheet" type="text/css" href="design/fbv-grey.css">
 </head>
 
