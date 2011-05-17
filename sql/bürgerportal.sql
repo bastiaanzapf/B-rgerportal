@@ -225,6 +225,13 @@ CREATE INDEX fki_referenz ON instanz USING btree (mandant_id, referenz_id);
 
 
 --
+-- Name: idx_fulltex; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX idx_fulltex ON instanz USING gin (to_tsvector('german'::regconfig, convert_from(content, 'utf8'::name)));
+
+
+--
 -- Name: benutzer_mandant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
