@@ -122,17 +122,6 @@ function parse_sk($doc,$baseurl) {
   }
 }
 
-
-function retrieve_instance($iid) {
-  $dbresult=pg_query_params(
-			    'SELECT * FROM '.
-			    'referenz JOIN instanz USING (referenz_id) '.
-			    'WHERE instanz_id=$1',
-			    array($iid) 
-			    );  
-  return pg_fetch_array($dbresult);
-}
-
 function parse_to_instance($iid) {
   $ref=retrieve_instance($iid);
 
